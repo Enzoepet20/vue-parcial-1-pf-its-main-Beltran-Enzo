@@ -6,14 +6,18 @@ import { useCartStore} from '@/stores/cartStore';
 
 // libreria
 import Rating from 'primevue/rating';
+import { ref } from 'vue';
 
 const cartStore = useCartStore();
 const booksCart: Book[] = cartStore.getCartItems();
 
+const limpiar = ref()
 
 </script>
 
 <template>
+
+    <button @="cartStore.clearCart()">Limpiar carrito</button>
     <div class="wrapper">
         <h1 class="w-full my-4 p-4 text-4xl">Tienda</h1>
         <div
@@ -28,6 +32,7 @@ const booksCart: Book[] = cartStore.getCartItems();
                 <Rating class="star" v-model="book.rating" :stars="5" />
                 <div class="publisher">{{ book.publisher }}</div>
                 <div class="price">$ {{ book.price }}.00</div>
+                <div></div>
             </div>
         </div>
     </div>
