@@ -2,6 +2,7 @@
 // importaciones locales
 import { useBookStore } from '@/stores/BookStore';
 import type { Book } from '@/models/BookModel'
+import { useCartStore } from '@/stores/cartStore';
 
 // librerias
 import { BookOpenIcon, ShoppingCartIcon, PlusCircleIcon } from '@heroicons/vue/24/outline';
@@ -10,6 +11,7 @@ import 'vue3-carousel/dist/carousel.css'
 
 const bookStore = useBookStore();
 const featuredBooks: Book[] = bookStore.getFeatured();
+const cartStore = useCartStore();
 
 // Parcial: Explica como funciona el feature component, como muestra los libros recomendados y como los obtiene?
 
@@ -68,7 +70,7 @@ const cSettings = {
                                 class="flex flex-row rounded-lg border border-slate-200 bg-slate-500 py-1.5 justify-between px-4 font-medium text-white transition-colors hover:bg-slate-950 active:bg-slate-950 disabled:opacity-50">
                                 <PlusCircleIcon class="text-2xl size-6 text-slate-200 m-auto" />
                                 <span class="w-2"></span>
-                                <p class="m-auto">Agregar al carro</p>
+                                <p @="cartStore.addToCart(book)" class="m-auto">Agregar al carro</p>
                                 <span class="w-2"></span>
                                 <ShoppingCartIcon class="text-2xl size-6 text-slate-200 m-auto" />
                             </button>

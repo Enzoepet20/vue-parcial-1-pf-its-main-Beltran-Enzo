@@ -2,11 +2,14 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { BookOpenIcon, HomeIcon, ShoppingBagIcon, XCircleIcon } from '@heroicons/vue/24/outline';
 import { ref } from 'vue'
+import {useCartStore} from './stores/cartStore'
+import CarroComponent from './components/CarroComponent.vue';
 
 // librerias
 import Sidebar from 'primevue/sidebar'
 
 // Parcial: instanciar nuestro useCartStore en una variable const para utilizarla en el componente
+const cartStore = useCartStore();
 // Parcial: obtener la cantidad de libros en carrito del cartStore y pasarlo en qty tag
 
 // Barra Lateral
@@ -46,7 +49,8 @@ function openCloseSidebar() {
       </RouterLink>
       <div class="bag-icon" @click="openCloseSidebar()">
         <!-- modificar con la cantidad de items en carro. Si el carro esta vacio. -->
-        <div class="qty-tag">1</div>
+
+        <div class="qty-tag">{{ cartStore.getAmountBooks() }}</div>
         <ShoppingBagIcon class="w-6 mr-2 text-slate-200" />
       </div>
     </div>
@@ -59,7 +63,7 @@ function openCloseSidebar() {
           <h2 class="text-2xl">Carrito</h2>
           <XCircleIcon class="h-8 w-8" @click="openCloseSidebar" />
         </div>
-        <!-- aca insertar CarroComponent -->
+        <CarroComponent />
       </div>
     </template>
   </Sidebar>
