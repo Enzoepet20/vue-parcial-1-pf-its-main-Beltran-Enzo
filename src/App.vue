@@ -1,33 +1,24 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router';
 import { BookOpenIcon, HomeIcon, ShoppingBagIcon, XCircleIcon } from '@heroicons/vue/24/outline';
-import { ref } from 'vue'
-import {useCartStore} from './stores/cartStore'
+import { ref } from 'vue';
+import { useCartStore } from './stores/cartStore';
 import CarroComponent from './components/CarroComponent.vue';
+import Sidebar from 'primevue/sidebar';
 
-// librerias
-import Sidebar from 'primevue/sidebar'
-
-// Parcial: instanciar nuestro useCartStore en una variable const para utilizarla en el componente
+// Instanciar useCartStore
 const cartStore = useCartStore();
-// Parcial: obtener la cantidad de libros en carrito del cartStore y pasarlo en qty tag
 
-// Barra Lateral
-const sidebarVisible = ref(false)
+// Cantidad de libros en el carrito
+const sidebarVisible = ref(false);
 
 // Abrir / Cerrar barra lateral
 function openCloseSidebar() {
-  if (sidebarVisible.value === true) {
-    sidebarVisible.value = false
-  }
-  else {
-    sidebarVisible.value = true
-  }
+  sidebarVisible.value = !sidebarVisible.value;
 }
 
-// Pacial: Por que uso ref para la variable sidebarVisible? 
-// Parcial: Como accedo al valor de ref para manipular los cambios en la barra lateral?
-
+// Uso de `ref`: Se usa para que Vue pueda reaccionar a los cambios en la variable `sidebarVisible` de manera reactiva.
+// Acceder a `ref`: Usando `sidebarVisible.value`, accedemos a su valor.
 
 </script>
 
@@ -47,9 +38,7 @@ function openCloseSidebar() {
       <RouterLink to="/" class="text-white-600 hover:text-white-400">
         <HomeIcon class="w-6 h-6 mr-2 text-slate-200" />
       </RouterLink>
-      <div class="bag-icon" @click="openCloseSidebar()">
-        <!-- modificar con la cantidad de items en carro. Si el carro esta vacio. -->
-
+      <div class="bag-icon" @click="openCloseSidebar">
         <div class="qty-tag">{{ cartStore.getAmountBooks() }}</div>
         <ShoppingBagIcon class="w-6 mr-2 text-slate-200" />
       </div>
@@ -80,7 +69,7 @@ nav {
 }
 
 .bag-icon {
-  position: relative
+  position: relative;
 }
 
 .qty-tag {
@@ -97,9 +86,7 @@ nav {
   color: white;
   border-radius: 50%;
   font-size: 12px;
-
 }
-
 
 .sidebar-content {
   width: 400px;
@@ -118,12 +105,10 @@ nav {
   justify-content: space-between;
   color: #fff;
   padding: 16px;
-  border: 1px solid #fff
+  border: 1px solid #fff;
 }
-
 
 .logo {
   width: 200px;
-
 }
 </style>
